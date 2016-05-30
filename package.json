@@ -1,0 +1,37 @@
+{
+  "name": "stripes-loader",
+  "version": "0.0.0",
+  "description": "A module loader to enable pluggable Redux applications.",
+  "repository": {
+    "private": true
+  },
+  "main": "dist/index.js",
+  "jsnext/main": "src/index.js",
+  "scripts": {
+    "prepublish": "npm run clean && npm run build",
+    "clean": "rimraf dist",
+    "test": "mocha --compilers js:babel-core/register",
+    "test-watch": "mocha --compilers js:babel-core/register -w --watch-extensions json",
+    "build": "babel src --out-dir dist"
+  },
+  "author": "Index Data",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.7.7",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "rimraf": "^2.5.2",
+    "babel-register": "^6.7.2",
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "mocha-webpack": "^0.3.0",
+    "webpack": "^1.13.0"
+  },
+  "dependencies": {
+    "loader-utils": "^0.2.14",
+    "lodash": "^4.11.1"
+  }
+}

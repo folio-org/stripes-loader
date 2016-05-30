@@ -1,0 +1,15 @@
+[
+  {
+    "path":"test",
+    "component":"",
+    "indexRoute": {
+      "component":"lib/foo"
+    },
+    "childRoutes": [
+      {
+        "path":"/test",
+        "component":"lib/bar"
+      }
+    ]
+  }
+]

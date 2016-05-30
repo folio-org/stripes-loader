@@ -1,0 +1,11 @@
+{
+  "name": "stripes-loader-test",
+  "version": "0.0.0",
+  "description": "A dummy module for testing stripes-loader",
+  "repository": {
+    "private": true
+  },
+  "stripes": {
+    "type":"fullpage"
+  }
+}
