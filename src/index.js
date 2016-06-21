@@ -15,7 +15,8 @@ function maybeReadJSON(filename) {
 
 module.exports = function(source) {
   assert(_.isObject(this.options.stripesLoader), 'stripes-loader requires an object with the modules to enable as keys at the webpack configuration key "stripesLoader"');
-  const enabled = this.options.stripesLoader;
+  const enabled = this.options.stripesLoader.modules;
+  let system = { okapi: this.options.stripesLoader.okapi };
   let allMenus = {};
   let allRoutes = [];
   let occupiedTopLevelPaths = {};
@@ -46,5 +47,6 @@ module.exports = function(source) {
   let routeString = stringifyRoutes(allRoutes);
   return "module.exports = { routes: " + routeString
           + ", menus:" + JSON.stringify(allMenus)
+          + ", system:" + JSON.stringify(system)
           + " };";
 }

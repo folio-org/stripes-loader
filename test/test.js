@@ -5,7 +5,12 @@ chai.should();
 const mockWebpackThis = {
   options: {
     stripesLoader: {
-      "../test/test-module":{}
+      "okapi": {
+        "url":"http://localhost/"
+      },
+      "modules": {
+        "../test/test-module":{}
+      }
     }
   }
 };
