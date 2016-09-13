@@ -12,8 +12,8 @@ function callbackify(reqParam) {
           }
 `;
 }
-export function stringifyRoute(route) { 
-  assert(_.isObject(route)); 
+export function stringifyRoute(route) {
+  assert(_.isObject(route));
   let s = "{\n";
   if (_.isString(route.path)) s += 'path: "' + route.path + '",\n';
   if (_.isString(route.component)) {
@@ -25,13 +25,13 @@ export function stringifyRoute(route) {
   }
   if (Array.isArray(route.childRoutes)) {
     anchorRoutes(route.childRoutes, route.moddir);
-    s += 'childRoutes: ' + stringifyRoutes(route.childRoutes) + ',\n'; 
+    s += 'childRoutes: ' + stringifyRoutes(route.childRoutes) + ',\n';
   }
   s = s.slice(0, -2); // remove trailing comma
   s += "\n},";
   return s;
 }
-export function stringifyRoutes(routes) { 
+export function stringifyRoutes(routes) {
   assert(Array.isArray(routes));
   let s = "[\n";
   routes.forEach(r => s+= stringifyRoute(r));
@@ -41,10 +41,10 @@ export function stringifyRoutes(routes) {
 export function anchorRoutes(routes, moddir) {
   assert(Array.isArray(routes));
   routes.forEach(r => {
-    assert(_.isObject(r)); 
+    assert(_.isObject(r));
     assert(typeof(r.moddir) === 'undefined', '"moddir" property not permitted in route');
     r.moddir = moddir;
   });
   return routes;
-} 
+}
 

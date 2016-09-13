@@ -39,7 +39,7 @@ module.exports = function(source) {
         let menus = maybeReadJSON(path.join(stripePath, 'menus.json'));
         if (menus !== null) Object.keys(menus).forEach(menu => {
           if (allMenus[menu] === undefined) allMenus[menu] = menus[menu];
-          else allMenus[menu] = allMenus[menu].concat(menus[menu]); 
+          else allMenus[menu] = allMenus[menu].concat(menus[menu]);
         });
         break;
     }
