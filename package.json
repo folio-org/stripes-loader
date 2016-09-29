@@ -4,7 +4,7 @@
   "description": "A module loader to enable pluggable Redux applications.",
   "repository": "folio-org/stripes-experiments",
   "publishConfig" : {
-    "registry" : "https://folio-nexus.indexdata.com/repository/npm-folio/"
+    "registry" : "https://repository.folio.org/repository/npm-folio/"
   },
   "main": "dist/index.js",
   "jsnext/main": "src/index.js",
