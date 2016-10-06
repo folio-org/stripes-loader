@@ -6,6 +6,8 @@
     "private": true
   },
   "stripes": {
-    "type":"fullpage"
+    "type":"app",
+    "setting":"value",
+    "a":0
   }
 }

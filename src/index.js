@@ -1,52 +1,37 @@
 import fs from 'fs';
 import path from 'path';
 import assert from 'assert';
-import _ from 'lodash/core';
-import { stringifyRoutes, anchorRoutes } from './routes';
+import _ from 'lodash';
 
-function maybeReadJSON(filename) {
-  try {
-    let data = fs.readFileSync(filename);
-    return JSON.parse(data);
-  } catch (e) {
-    return null;
-  }
-}
+const appendOrSingleton = (maybeArray, newValue) => {
+  const singleton = [newValue];
+  if (Array.isArray(maybeArray)) return maybeArray.concat(singleton);
+  return singleton;
+};
 
-module.exports = function(source) {
-  assert(_.isObject(this.options.stripesLoader), 'stripes-loader requires an object with the modules to enable as keys at the webpack configuration key "stripesLoader"');
-  const enabled = this.options.stripesLoader.modules;
-  let system = { okapi: this.options.stripesLoader.okapi };
-  let allMenus = {};
-  let allRoutes = [];
-  let occupiedTopLevelPaths = {};
-  Object.keys(enabled).forEach(stripe => {
-    let packageJSONPath = require.resolve(path.join(stripe, '/package.json'));
-    let packageJSON = JSON.parse(fs.readFileSync(packageJSONPath));
-    assert(_.isObject(packageJSON.stripes, 'included module ' + stripe
-          + ' does not have a "stripes" key in package.json'));
-    assert(_.isString(packageJSON.stripes.type, 'included module ' + stripe
-          + ' does not specify stripes.type in package.json'));
-    let stripePath = path.dirname(packageJSONPath);
-    switch (packageJSON.stripes.type) {
-      case 'fullpage':
-        let routes = maybeReadJSON(path.join(stripePath, 'routes.json'));
-        if (routes !== null) {
-          //TODO fail on conflicting route
-          allRoutes = allRoutes.concat(anchorRoutes(routes, stripePath));
-        }
-
-        let menus = maybeReadJSON(path.join(stripePath, 'menus.json'));
-        if (menus !== null) Object.keys(menus).forEach(menu => {
-          if (allMenus[menu] === undefined) allMenus[menu] = menus[menu];
-          else allMenus[menu] = allMenus[menu].concat(menus[menu]);
-        });
-        break;
-    }
+module.exports = (config, validators = {}) => {
+  assert(_.isObject(config) && _.isObject(config.modules),
+         'stripes-loader requires an object with the modules to enable as keys');
+  const enabled = config.modules;
+  const output = Object.assign({}, config);
+  delete output.modules;
+  output.modules = {};
+  _.forOwn(enabled, (overrides, stripe) => {
+    const packageJSONPath = require.resolve(path.join(stripe, '/package.json'));
+    const packageJSON = JSON.parse(fs.readFileSync(packageJSONPath));
+    assert(_.isObject(packageJSON.stripes,
+           `included module ${stripe} does not have a "stripes" key in package.json`));
+    const defaults = packageJSON.stripes;
+    assert(_.isString(defaults.type,
+           `included module ${stripe} does not specify stripes.type in package.json`));
+    const stripeConfig = Object.assign({}, defaults, overrides, {
+      module: stripe,
+      moduleRoot: path.dirname(packageJSONPath),
+      modulePackageJSON: packageJSON,
+    });
+    delete stripeConfig.type;
+    output.modules[defaults.type] = appendOrSingleton(output.modules[defaults.type], stripeConfig);
   });
-  let routeString = stringifyRoutes(allRoutes);
-  return "module.exports = { routes: " + routeString
-          + ", menus:" + JSON.stringify(allMenus)
-          + ", system:" + JSON.stringify(system)
-          + " };";
-}
+  console.log(output.modules);
+  return output;
+};
