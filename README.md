@@ -11,5 +11,11 @@ This is a Webpack loader used in stripes-core to pull in components from
 modules. The configuration you set there to enable modules is actually
 consumed by this package, as is the module configuration and metadata.
 
-It runs in NodeJS via Webpack when Stripes is being bundled for a tenant
+It runs in Node.js via Webpack when Stripes is being bundled for a tenant
 and not in any browser.
+
+## Additional information
+
+See [stripes-core](https://github.com/folio-org/stripes-experiments/tree/master/stripes-core).
+
+Other FOLIO Developer documentation is at [dev.folio.org](http://dev.folio.org/)
