@@ -16,6 +16,6 @@ and not in any browser.
 
 ## Additional information
 
-See [stripes-core](https://github.com/folio-org/stripes-experiments/tree/master/stripes-core).
+See [stripes-core](https://github.com/folio-org/stripes-core).
 
 Other FOLIO Developer documentation is at [dev.folio.org](http://dev.folio.org/)
