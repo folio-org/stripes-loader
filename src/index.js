@@ -35,7 +35,7 @@ module.exports = function stripesLoader() {
       module: stripe,
       // TODO make this async ie. return a promise instead once we can handle that
       // TODO yes, this is silly, but we can't serialize the closure
-      getModule: eval(`() => require('${stripe}').default`),
+      getModule: eval(`() => require('${stripe}').default`), // eslint-disable-line no-eval
       moduleRoot: path.dirname(packageJSONPath),
       description: packageJSON.description,
       version: packageJSON.version,
