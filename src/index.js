@@ -6,6 +6,7 @@ import _ from 'lodash';
 // that leaves functions bare so eval() can regurgitate them eg. when used as
 // a Webpack loader"
 import Exval from 'exval';
+
 const exval = new Exval();
 
 const appendOrSingleton = (maybeArray, newValue) => {
