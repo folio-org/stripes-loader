@@ -27,10 +27,10 @@ module.exports = function stripesLoader() {
     const packageJSONPath = require.resolve(path.join(stripe, '/package.json'));
     const packageJSON = JSON.parse(fs.readFileSync(packageJSONPath));
     assert(_.isObject(packageJSON.stripes,
-           `included module ${stripe} does not have a "stripes" key in package.json`));
+      `included module ${stripe} does not have a "stripes" key in package.json`));
     const defaults = packageJSON.stripes;
     assert(_.isString(defaults.type,
-           `included module ${stripe} does not specify stripes.type in package.json`));
+      `included module ${stripe} does not specify stripes.type in package.json`));
     const stripeConfig = Object.assign({}, defaults, overrides, {
       module: stripe,
       // TODO make this async ie. return a promise instead once we can handle that
