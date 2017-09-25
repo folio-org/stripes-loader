@@ -31,7 +31,8 @@
     "eslint": "^4.7.2",
     "eslint-config-stripes": "^0.0.1",
     "mocha": "^3.1.0",
-    "rimraf": "^2.5.4"
+    "rimraf": "^2.5.4",
+    "webpack": "^3.6.0"
   },
   "dependencies": {
     "exval": "^0.1.0",
