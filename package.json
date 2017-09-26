@@ -14,7 +14,7 @@
     "test": "mocha --require babel-test-hook",
     "test-watch": "mocha --require babel-test-hook -w --watch-extensions json",
     "lint": "eslint src || true",
-    "build": "babel src --out-dir dist"
+    "build": "babel src --out-dir dist --presets=env,stage-2"
   },
   "author": "Index Data",
   "license": "Apache-2.0",
