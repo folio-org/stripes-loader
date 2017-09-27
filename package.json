@@ -1,6 +1,6 @@
 {
   "name": "@folio/stripes-loader",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A module loader to enable pluggable Javascript applications.",
   "repository": "folio-org/stripes-loader",
   "publishConfig": {
